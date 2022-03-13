@@ -5,7 +5,7 @@ type ModPlayer struct {
 	// 玩家用户id
 	Uid            int64
 	Icon           int
-	Card           int64
+	Card           int
 	Name           string
 	Sign           string
 	PlayerLevel    int64
@@ -19,13 +19,20 @@ type ModPlayer struct {
 	IsGM           int
 }
 
-// RecvSetIcon 用来更新玩家的icon
-func (this *Player) RecvSetIcon(iconId int) {
-
-	if !this.ModIcon.IsHasIcon(iconId) {
+func (this *ModPlayer) RecvSetIcon(iconId int, player *Player) {
+	if !player.ModIcon.IsHasIcon(iconId) {
 		// todo 没有对应的icon 通知客户端，操作违法
 		return
 	}
 
-	this.ModPlayer.Icon = iconId
+	player.ModPlayer.Icon = iconId
+}
+
+func (this *ModPlayer) RecvSetCard(cardId int, player *Player) {
+	if !player.ModCard.IsHasCard(cardId) {
+		// todo 没有对应的card 通知客户端，操作违法
+		return
+	}
+
+	player.ModPlayer.Card = cardId
 }
