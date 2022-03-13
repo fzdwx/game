@@ -1,15 +1,15 @@
 package banwords
 
-import "regexp"
+import (
+	"fmt"
+	"game/config"
+	"regexp"
+	"time"
+)
 
 var banWord = Of(
-	[]string{
-		"外挂",
-		"工具",
-	},
-	[]string{
-		"fzdwx",
-	},
+	config.GetBaseWords(),
+	[]string{},
 )
 
 // BanWord 是一个违禁词匹配工具
@@ -21,6 +21,11 @@ type BanWord struct {
 // IsBanWord 是用来检查 txt 是否为违禁词
 func IsBanWord(txt string) bool {
 	return banWord.IsBanWord(txt)
+}
+
+// Instance get BandWord 单例
+func Instance() *BanWord {
+	return banWord
 }
 
 // Of 是一个创建 BanWord 的工厂方法
@@ -46,4 +51,15 @@ func (this *BanWord) IsBanWord(txt string) bool {
 	}
 
 	return false
+}
+
+// RunRefreshTask 启动更新词库
+func (this *BanWord) RunRefreshTask() {
+	ticker := time.NewTicker(time.Second * 10)
+	for {
+		select {
+		case <-ticker.C:
+			fmt.Println(time.Now().Unix())
+		}
+	}
 }
