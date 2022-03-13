@@ -20,6 +20,7 @@ func TestModPlayer_RecvSetCard(t *testing.T) {
 		t.Errorf("recv set card error %d", player.modPlayer.Card)
 	}
 }
+
 func TestPlayer_RecvSetName(t *testing.T) {
 	player := CreateTestPlayer()
 
@@ -41,5 +42,29 @@ func TestPlayer_RecvSetName(t *testing.T) {
 	player.RecvSetName("你好")
 	if !(player.modPlayer.Name == "你好") {
 		t.Errorf("recv set name error %s", player.modPlayer.Name)
+	}
+}
+
+func TestPlayer_RecvSetSign(t *testing.T) {
+	player := CreateTestPlayer()
+
+	player.RecvSetSign("我操")
+	if !(player.modPlayer.Sign == "我操") {
+		t.Errorf("recv set sign   error %s", player.modPlayer.Sign)
+	}
+
+	player.RecvSetSign("fzdwx")
+	if !(player.modPlayer.Sign == "我操") {
+		t.Errorf("recv set sign error %s", player.modPlayer.Sign)
+	}
+
+	player.RecvSetSign("外挂")
+	if !(player.modPlayer.Sign == "我操") {
+		t.Errorf("recv set sign error %s", player.modPlayer.Sign)
+	}
+
+	player.RecvSetSign("你好")
+	if !(player.modPlayer.Sign == "你好") {
+		t.Errorf("recv set sign error %s", player.modPlayer.Sign)
 	}
 }
