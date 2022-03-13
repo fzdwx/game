@@ -15,20 +15,20 @@ func CreateTestPlayer() *Player {
 
 // RecvSetIcon 用来更新玩家的icon
 func (this *Player) RecvSetIcon(iconId int) {
-	this.modPlayer.RecvSetIcon(iconId, this)
+	this.modPlayer.recvSetIcon(iconId, this)
 }
 
 // RecvSetCard 用来更新玩家的card
 func (this *Player) RecvSetCard(cardId int) {
-	this.modPlayer.RecvSetCard(cardId, this)
+	this.modPlayer.recvSetCard(cardId, this)
 }
 
 // RecvSetName 用来更新玩家的name
 func (this *Player) RecvSetName(name string) {
-	this.modPlayer.RecvSetName(name)
+	this.modPlayer.recvSetName(name)
 }
 
 // RecvSetSign 用来更新玩家的sign
 func (this *Player) RecvSetSign(name string) {
-	this.modPlayer.RecvSetSign(name)
+	this.modPlayer.recvSetSign(name)
 }

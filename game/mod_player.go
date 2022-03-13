@@ -21,8 +21,8 @@ type ModPlayer struct {
 	IsGM           int
 }
 
-func (this *ModPlayer) RecvSetIcon(iconId int, player *Player) {
-	if !player.modIcon.IsHasIcon(iconId) {
+func (this *ModPlayer) recvSetIcon(iconId int, player *Player) {
+	if !player.modIcon.isHasIcon(iconId) {
 		// todo 没有对应的icon 通知客户端，操作违法
 		return
 	}
@@ -30,8 +30,8 @@ func (this *ModPlayer) RecvSetIcon(iconId int, player *Player) {
 	player.modPlayer.Icon = iconId
 }
 
-func (this *ModPlayer) RecvSetCard(cardId int, player *Player) {
-	if !player.modCard.IsHasCard(cardId) {
+func (this *ModPlayer) recvSetCard(cardId int, player *Player) {
+	if !player.modCard.isHasCard(cardId) {
 		// todo 没有对应的card 通知客户端，操作违法
 		return
 	}
@@ -39,14 +39,14 @@ func (this *ModPlayer) RecvSetCard(cardId int, player *Player) {
 	player.modPlayer.Card = cardId
 }
 
-func (this *ModPlayer) RecvSetName(name string) {
+func (this *ModPlayer) recvSetName(name string) {
 	if banwords.IsBanWord(name) {
 		return
 	}
 	this.Name = name
 }
 
-func (this *ModPlayer) RecvSetSign(sign string) {
+func (this *ModPlayer) recvSetSign(sign string) {
 	if banwords.IsBanWord(sign) {
 		return
 	}
