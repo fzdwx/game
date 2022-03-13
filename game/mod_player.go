@@ -1,6 +1,9 @@
 package game
 
-import "game/banwords"
+import (
+	"game/banwords"
+	"game/config"
+)
 
 // ModPlayer 用户基础信息实体
 type ModPlayer struct {
@@ -10,7 +13,7 @@ type ModPlayer struct {
 	Card           int
 	Name           string
 	Sign           string
-	PlayerLevel    int64
+	PlayerLevel    int
 	PlayerExp      int64
 	WorldLevel     int64
 	WorldLevelCool int64
@@ -51,4 +54,27 @@ func (this *ModPlayer) recvSetSign(sign string) {
 		return
 	}
 	this.Sign = sign
+}
+
+func (this *ModPlayer) AddExp(exp int64) {
+	this.PlayerExp += exp
+
+	for {
+		levelConfig := config.GetLevelConfig(this.PlayerLevel)
+		if levelConfig == nil {
+			break
+		}
+
+		if levelConfig.PlayerExp == 0 {
+			break
+		}
+
+		// 是否完成任务
+		if this.PlayerExp >= levelConfig.PlayerExp {
+			this.PlayerLevel++
+			this.PlayerExp -= levelConfig.PlayerExp
+		}
+
+	}
+
 }
