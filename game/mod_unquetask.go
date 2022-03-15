@@ -7,7 +7,8 @@ const (
 )
 
 type ModUniqueTask struct {
-	MyTaskInfo map[int]*TaskInfo
+	myTaskInfo map[int]*TaskInfo
+	//mux        sync.RWMutex
 }
 
 type TaskInfo struct {
@@ -17,9 +18,16 @@ type TaskInfo struct {
 
 // IsFinish  判断某个任务是否完成
 func (this *ModUniqueTask) IsFinish(taskId int) bool {
-	if task, ok := this.MyTaskInfo[taskId]; ok {
+	task := this.GetTaskInfo(taskId)
+	if task != nil {
 		return task.State == TASK_STATE_FINISH
-	} else {
-		return false
 	}
+	return false
+}
+
+func (this *ModUniqueTask) GetTaskInfo(taskId int) *TaskInfo {
+	//this.mux.RLock()
+	info := this.myTaskInfo[taskId]
+	//this.mux.RUnlock()
+	return info
 }

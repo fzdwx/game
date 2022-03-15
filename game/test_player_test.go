@@ -91,3 +91,11 @@ func TestModPlayer_AddExp2(t *testing.T) {
 
 	fmt.Println(p.modPlayer.PlayerLevel)
 }
+
+func TestPlayer_SetBirth(t *testing.T) {
+	player := CreateTestPlayer()
+
+	player.SetBirth(1310)
+	player.SetBirth(1010)
+	player.SetBirth(1111)
+}
