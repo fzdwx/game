@@ -73,8 +73,9 @@ func (this *ModPlayer) AddExp(exp int64) {
 		if this.PlayerExp >= levelConfig.PlayerExp {
 			this.PlayerLevel++
 			this.PlayerExp -= levelConfig.PlayerExp
+		} else {
+			break
 		}
 
 	}
-
 }

@@ -1,6 +1,7 @@
 package game
 
 import (
+	"game/util"
 	"testing"
 )
 
@@ -66,5 +67,19 @@ func TestPlayer_RecvSetSign(t *testing.T) {
 	player.RecvSetSign("你好")
 	if !(player.modPlayer.Sign == "你好") {
 		t.Errorf("recv set sign error %s", player.modPlayer.Sign)
+	}
+}
+
+func TestModPlayer_AddExp(t *testing.T) {
+	player := CreateTestPlayer()
+
+	player.modPlayer.AddExp(5000)
+
+	if !util.Assert(player.modPlayer.PlayerExp, int64(975)) {
+		t.Errorf("add exp error exp not match")
+	}
+
+	if !util.Assert(player.modPlayer.PlayerLevel, 6) {
+		t.Errorf("add exp error level not match")
 	}
 }

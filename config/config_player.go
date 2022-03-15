@@ -1,5 +1,10 @@
 package config
 
+import (
+	"game/util"
+	"log"
+)
+
 type playerLevelCfg struct {
 	PlayerLevel int
 	PlayerExp   int64
@@ -10,7 +15,11 @@ type playerLevelCfg struct {
 var playerLevels []*playerLevelCfg
 
 func init() {
-	// todo load config
+	if err := util.CsvParse("../resource/PlayerLevel.csv", &playerLevels); err != nil {
+		panic(err)
+	}
+
+	log.Printf("load player level info success. has %d levels", len(playerLevels))
 }
 
 // GetLevelConfig 获取对应玩家等级的配置
