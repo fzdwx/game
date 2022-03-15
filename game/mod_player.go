@@ -56,7 +56,7 @@ func (this *ModPlayer) recvSetSign(sign string) {
 	this.Sign = sign
 }
 
-func (this *ModPlayer) AddExp(exp int64) {
+func (this *ModPlayer) addExp(exp int64, player *Player) {
 	this.PlayerExp += exp
 
 	for {
@@ -70,6 +70,10 @@ func (this *ModPlayer) AddExp(exp int64) {
 		}
 
 		// 是否完成任务
+		if levelConfig.ChapterId > 0 && !player.modUniqueTask.IsFinish(levelConfig.ChapterId) {
+			break
+		}
+
 		if this.PlayerExp >= levelConfig.PlayerExp {
 			this.PlayerLevel++
 			this.PlayerExp -= levelConfig.PlayerExp

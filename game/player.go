@@ -2,14 +2,15 @@ package game
 
 // Player 游戏玩家实体
 type Player struct {
-	modPlayer *ModPlayer
-	modIcon   *ModIcon
-	modCard   *ModCard
+	modPlayer     *ModPlayer
+	modIcon       *ModIcon
+	modCard       *ModCard
+	modUniqueTask *ModUniqueTask
 }
 
 // CreateTestPlayer 创建测试玩家
 func CreateTestPlayer() *Player {
-	player := Player{&ModPlayer{Icon: 0}, &ModIcon{}, &ModCard{}}
+	player := Player{&ModPlayer{Icon: 0}, &ModIcon{}, &ModCard{}, &ModUniqueTask{MyTaskInfo: map[int]*TaskInfo{}}}
 	return &player
 }
 

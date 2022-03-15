@@ -1,6 +1,7 @@
 package game
 
 import (
+	"fmt"
 	"game/util"
 	"testing"
 )
@@ -73,7 +74,7 @@ func TestPlayer_RecvSetSign(t *testing.T) {
 func TestModPlayer_AddExp(t *testing.T) {
 	player := CreateTestPlayer()
 
-	player.modPlayer.AddExp(5000)
+	player.modPlayer.addExp(5000, player)
 
 	if !util.Assert(player.modPlayer.PlayerExp, int64(975)) {
 		t.Errorf("add exp error exp not match")
@@ -82,4 +83,11 @@ func TestModPlayer_AddExp(t *testing.T) {
 	if !util.Assert(player.modPlayer.PlayerLevel, 6) {
 		t.Errorf("add exp error level not match")
 	}
+}
+
+func TestModPlayer_AddExp2(t *testing.T) {
+	p := CreateTestPlayer()
+	p.modPlayer.addExp(5000000000, p)
+
+	fmt.Println(p.modPlayer.PlayerLevel)
 }
