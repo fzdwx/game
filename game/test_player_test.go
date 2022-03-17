@@ -95,19 +95,25 @@ func TestModPlayer_AddExp2(t *testing.T) {
 func TestPlayer_SetShowCard(t *testing.T) {
 	p := CreateTestPlayer()
 
-	ints := []int{1, 2, 34, 5, 6, 7, 8, 10, 11, 12, 11}
+	ints := []int{4000001, 4000002, 4000003, 4000005, 4000006, 4000007, 4000008, 4000010, 4000011, 4000012, 4000011}
 	p.SetShowCard(ints)
 	if !util.Assert(len(p.modPlayer.ShowCard), 0) {
 		t.Errorf("")
 	}
-	ints = []int{1, 2, 34, 5, 6, 7, 8, 10, 11}
+	ints = []int{4000001, 4000002, 4000003, 4000005, 4000006, 4000007, 4000008, 4000012, 4000011}
 	p.SetShowCard(ints)
 	if !util.Assert(len(p.modPlayer.ShowCard), 9) {
 		t.Errorf("")
 	}
-	ints = []int{1, 2, 34, 5, 6, 7, 8, 11, 11}
+	ints = []int{4000002, 4000003, 4000005, 4000006, 4000007, 4000008, 4000010, 4000011, 4000011}
 	p.SetShowCard(ints)
 	if !util.Assert(len(p.modPlayer.ShowCard), 8) {
+		t.Errorf("")
+	}
+
+	ints = []int{1}
+	p.SetShowCard(ints)
+	if !util.Assert(len(p.modPlayer.ShowCard), 0) {
 		t.Errorf("")
 	}
 }
