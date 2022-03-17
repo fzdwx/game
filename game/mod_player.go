@@ -150,3 +150,26 @@ func (this *ModPlayer) setBirth(birth int) {
 	}
 	this.Birth = birth
 }
+
+func (this *ModPlayer) setShowCard(card []int, player *Player) {
+	i := len(card)
+	if i > 9 {
+		return
+	}
+
+	cardExist := make(map[int]int)
+	var newCard []int
+	for i, c := range card {
+		if _, ok := cardExist[c]; ok {
+			continue
+		}
+
+		if !player.modCard.isHasCard(c) {
+			continue
+		}
+		cardExist[c] = i
+		newCard = append(newCard, c)
+	}
+
+	this.ShowCard = newCard
+}

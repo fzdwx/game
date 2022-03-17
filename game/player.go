@@ -61,13 +61,17 @@ func (this *Player) ReturnWorldLevel() {
 func (this *Player) SetBirth(birth int) {
 	this.modPlayer.setBirth(birth)
 
-	if this.modPlayer.isBirthDay() {
+	if this.modPlayer.IsBirthDay() {
 		log.Println("今天是你的生日~~~")
 	}
-
 }
 
-func (this ModPlayer) isBirthDay() bool {
+// SetShowCard 设置展示名片
+func (this *Player) SetShowCard(showCard []int) {
+	this.modPlayer.setShowCard(showCard, this)
+}
+
+func (this ModPlayer) IsBirthDay() bool {
 	now := time.Now()
 	month := now.Month()
 	day := now.Day()

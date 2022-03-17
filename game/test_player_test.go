@@ -92,6 +92,50 @@ func TestModPlayer_AddExp2(t *testing.T) {
 	fmt.Println(p.modPlayer.PlayerLevel)
 }
 
+func TestPlayer_SetShowCard(t *testing.T) {
+	p := CreateTestPlayer()
+
+	ints := []int{1, 2, 34, 5, 6, 7, 8, 10, 11, 12, 11}
+	p.SetShowCard(ints)
+	if !util.Assert(len(p.modPlayer.ShowCard), 0) {
+		t.Errorf("")
+	}
+	ints = []int{1, 2, 34, 5, 6, 7, 8, 10, 11}
+	p.SetShowCard(ints)
+	if !util.Assert(len(p.modPlayer.ShowCard), 9) {
+		t.Errorf("")
+	}
+	ints = []int{1, 2, 34, 5, 6, 7, 8, 11, 11}
+	p.SetShowCard(ints)
+	if !util.Assert(len(p.modPlayer.ShowCard), 8) {
+		t.Errorf("")
+	}
+}
+
+func TestPlayer_ReduceWorldLevel(t *testing.T) {
+	p := CreateTestPlayer()
+
+	p.modPlayer.WorldLevel = 6
+	p.modPlayer.WorldLevelNow = 6
+
+	p.ReduceWorldLevel()
+
+	if !util.Assert(p.modPlayer.WorldLevel, int(6)) {
+		t.Errorf("")
+	}
+	if !util.Assert(p.modPlayer.WorldLevelNow, int(5)) {
+		t.Errorf("")
+	}
+
+	cool := p.modPlayer.WorldLevelCool
+
+	p.ReduceWorldLevel()
+
+	if !util.Assert(p.modPlayer.WorldLevelCool, cool) {
+		t.Errorf("")
+	}
+}
+
 func TestPlayer_SetBirth(t *testing.T) {
 	player := CreateTestPlayer()
 
